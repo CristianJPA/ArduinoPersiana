@@ -1,10 +1,10 @@
 #include <ESP8266WiFi.h>
 #include <FirebaseArduino.h>
 #include <ArduinoJson.h>
-//#define WIFI_SSID "VTR-1244526"
-//#define WIFI_PASSWORD "k5hMmmw9qzxk"
-#define WIFI_SSID "iPhone de Cristian"
-#define WIFI_PASSWORD "Cjpa132500"
+#define WIFI_SSID "VTR-1244526"
+#define WIFI_PASSWORD "k5hMmmw9qzxk"
+//#define WIFI_SSID "iPhone de Cristian"
+//#define WIFI_PASSWORD "Cjpa132500"
 #define FIREBASE_HOST "persiana-automatica-3b8f8-default-rtdb.firebaseio.com"
 #define FIREBASE_AUTH "2czHLYZ8SGZ2XzLpv4DQyrCQ3IwWBrN0m6Aukcs2"
 //librerias para getTime()
@@ -47,7 +47,7 @@ void setup() {
   } else {
     Serial.println("Conexion con Firebase exitosa!!! :D");
   }
-  
+  //////////////
   //PINMODE
   pinMode(LUZ,INPUT);
   pinMode(switch1,OUTPUT);
@@ -96,97 +96,89 @@ void loop() {
   valorSwitch2 = digitalRead(switch2);
 
   //Boton Subida ArrowUp
-  if ((subir==1)&&(valorSwitch1==0)&&(valorSwitch2==0)|| (horarioSubida == Time)){
-   Serial.println("Estoy Subiendo :D"); 
-    digitalWrite(MOTORA,LOW);
-    digitalWrite(MOTORB,HIGH); 
+  if ((subir == 1)|| (horarioSubida == Time)||(cantidadLuz > luminosidadSubida)){
+    if((valorSwitch1==0)&&(valorSwitch2==0)){      
+        Serial.println("Estoy Subiendo :D"); 
+        //digitalWrite(MOTORA , HIGH);
+        //digitalWrite(MOTORB , LOW);
+    }    
   }
+  if ((subir == 1)|| (horarioSubida == Time)||(cantidadLuz > luminosidadSubida)){
+    if((valorSwitch1==0)&&(valorSwitch2==0)){      
+        
+    }    
+  }
+  
+  
+  
+//  if ((subir==1)&&(valorSwitch1==0)&&(valorSwitch2==0)|| (horarioSubida == Time)){
+//    Serial.println("Estoy Subiendo :D"); 
+//    digitalWrite(MOTORA,LOW);
+//    digitalWrite(MOTORB,HIGH); 
+//  }
     
-  
-   if((horarioSubida == Time) &&(valorSwitch1==1)&&(valorSwitch2==0)){
-    Serial.println("DETENIDO HORA c;"); 
-    digitalWrite(MOTORA,LOW);
-    digitalWrite(MOTORB,LOW);
-}
-// if((cantidadLuz > luminosidadSubida ) &&(valorSwitch1==1)&&(valorSwitch2==0)){
+//  
+//   if((horarioSubida == Time) &&(valorSwitch1==1)&&(valorSwitch2==0)){
 //    Serial.println("DETENIDO HORA c;"); 
 //    digitalWrite(MOTORA,LOW);
 //    digitalWrite(MOTORB,LOW);
 //}
-  //Control de Subida | boton detener
-  if ((detener==1)&&(valorSwitch1==0)&&(valorSwitch2==0)&&(horarioSubida != Time)){
-    Serial.println("Se ha detenido :D"); 
-    digitalWrite(MOTORA,LOW);
-    digitalWrite(MOTORB,LOW);
-  }
-  
- 
-  //Boton Bajar ArrowDown
-  if ((bajar==1)&&(valorSwitch1==0)&&(valorSwitch2==0)|| (horarioBajada == Time )){
-    Serial.println("Estoy Bajando :D"); 
-    digitalWrite(MOTORA,HIGH);
-    digitalWrite(MOTORB,LOW);    
-  } 
-  if((horarioBajada == Time) &&(valorSwitch1==0)&&(valorSwitch2==1)){
-    Serial.println("DETENIDO HORA c;"); 
-    digitalWrite(MOTORA,LOW);
-    digitalWrite(MOTORB,LOW);
-  }
-//  if((cantidadLuz < luminosidadBajada) &&(valorSwitch1==0)&&(valorSwitch2==1)){
+//// if((cantidadLuz > luminosidadSubida ) &&(valorSwitch1==1)&&(valorSwitch2==0)){
+////    Serial.println("DETENIDO HORA c;"); 
+////    digitalWrite(MOTORA,LOW);
+////    digitalWrite(MOTORB,LOW);
+////}
+//  //Control de Subida | boton detener
+//  if ((detener==1)&&(valorSwitch1==0)&&(valorSwitch2==0)&&(horarioSubida != Time)){
+//    Serial.println("Se ha detenido :D"); 
+//    digitalWrite(MOTORA,LOW);
+//    digitalWrite(MOTORB,LOW);
+//  }
+//  
+// 
+//  //Boton Bajar ArrowDown
+//  if ((bajar==1)&&(valorSwitch1==0)&&(valorSwitch2==0)|| (horarioBajada == Time )){
+//    Serial.println("Estoy Bajando :D"); 
+//    digitalWrite(MOTORA,HIGH);
+//    digitalWrite(MOTORB,LOW);    
+//  } 
+//  if((horarioBajada == Time) &&(valorSwitch1==0)&&(valorSwitch2==1)){
 //    Serial.println("DETENIDO HORA c;"); 
 //    digitalWrite(MOTORA,LOW);
 //    digitalWrite(MOTORB,LOW);
-//}
- //Control de bajada | boton detener
-  if ((detener==1)&&(valorSwitch1==0)&&(valorSwitch2==0)&&(horarioBajada != Time)){
-    Serial.println("Se ha detenido :D"); 
-    digitalWrite(MOTORA,LOW);
-    digitalWrite(MOTORB,LOW);
-  }
-
-
-  
-//  if ((cantidadLuz > luminosidadBajada)&& (cantidadLuz > luminosidadSubida) ) {
+//  }
+////  if((cantidadLuz < luminosidadBajada) &&(valorSwitch1==0)&&(valorSwitch2==1)){
+////    Serial.println("DETENIDO HORA c;"); 
+////    digitalWrite(MOTORA,LOW);
+////    digitalWrite(MOTORB,LOW);
+////}
+// //Control de bajada | boton detener
+//  if ((detener==1)&&(valorSwitch1==0)&&(valorSwitch2==0)&&(horarioBajada != Time)){
+//    Serial.println("Se ha detenido :D"); 
+//    digitalWrite(MOTORA,LOW);
+//    digitalWrite(MOTORB,LOW);
+//  }
+//  
+//
+//
+//
+//  
+//  if ((subir==1)&&(valorSwitch1==0)&&(valorSwitch2==1)){
 //    digitalWrite(MOTORA,LOW);
 //    digitalWrite(MOTORB,HIGH);
-//  } else if ((cantidadLuz < luminosidadBajada)&& (cantidadLuz < luminosidadSubida) ) {
-//     digitalWrite(MOTORA,HIGH);
-//    digitalWrite(MOTORB,LOW);
-//   }else{
-//    digitalWrite(MOTORA,LOW);
-    //digitalWrite(MOTORB,LOW);
-  // }
-
-  //
-//   if ((cantidadLuz > luminosidadBajada)&& (cantidadLuz > luminosidadSubida) &&(valorSwitch1==1)&&(valorSwitch2==0)) {
+//  }
+//  if ((subir==1)&&(valorSwitch1==1)&&(valorSwitch2==0)){
 //    digitalWrite(MOTORA,LOW);
 //    digitalWrite(MOTORB,LOW);
-//  } else if ((cantidadLuz < luminosidadBajada)&& (cantidadLuz < luminosidadSubida)&&(valorSwitch1==0)&&(valorSwitch2==1) ) {
-//     digitalWrite(MOTORA,LOW);
-//    digitalWrite(MOTORB,LOW);
-//   }
-
-   
-
-
-
-  
-  if ((subir==1)&&(valorSwitch1==0)&&(valorSwitch2==1)){
-    digitalWrite(MOTORA,LOW);
-    digitalWrite(MOTORB,HIGH);
-  }
-  if ((subir==1)&&(valorSwitch1==1)&&(valorSwitch2==0)){
-    digitalWrite(MOTORA,LOW);
-    digitalWrite(MOTORB,LOW);
-  }
-  if ((bajar==1)&&(valorSwitch1==1)&&(valorSwitch2==0)){
-      digitalWrite(MOTORA,HIGH);
-      digitalWrite(MOTORB,LOW);
-  }
-   if ((bajar==1)&&(valorSwitch1==0)&&(valorSwitch2==1)){
-      digitalWrite(MOTORA,LOW);
-      digitalWrite(MOTORB,LOW);
-  }
+//  }
+//  if ((bajar==1)&&(valorSwitch1==1)&&(valorSwitch2==0)){
+//      digitalWrite(MOTORA,HIGH);
+//      digitalWrite(MOTORB,LOW);
+//  }
+//   if ((bajar==1)&&(valorSwitch1==0)&&(valorSwitch2==1)){
+//      digitalWrite(MOTORA,LOW);
+//      digitalWrite(MOTORB,LOW);
+//  }
 
   
   
@@ -204,14 +196,14 @@ void loop() {
 //  Serial.println(detener); 
 //  Serial.println("subir");
 //  Serial.println(subir); 
-  Serial.println("horarioBajada");
-  Serial.println(horarioBajada); 
-  Serial.println("horarioSubida");
-  Serial.println(horarioSubida); 
-  Serial.println("luminosidadBajada");
-  Serial.println(luminosidadBajada);
-  Serial.println("luminosidadSubida");
-  Serial.println(luminosidadSubida);
+//  Serial.println("horarioBajada");
+//  Serial.println(horarioBajada); 
+//  Serial.println("horarioSubida");
+//  Serial.println(horarioSubida); 
+//  Serial.println("luminosidadBajada");
+//  Serial.println(luminosidadBajada);
+//  Serial.println("luminosidadSubida");
+//  Serial.println(luminosidadSubida);
   Serial.println("cantidadLuz");
   Serial.println(cantidadLuz); 
 //  
